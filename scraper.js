@@ -55,7 +55,7 @@ function scrapeData(site){
                         attr: "src"
                     }
                 }).then(shirtDetails => {
-                    var tshirts = [
+                    let tshirts = [
                         {
                             "Title": shirtDetails.title,
                             "Price": shirtDetails.price,
@@ -65,7 +65,7 @@ function scrapeData(site){
                         }
                     ];
                     //console.log(tshirts)
-                    var csv = json2csv({data: tshirts, fields:fields});
+                    let csv = json2csv({data: tshirts, fields:fields});
                     console.log(csv);
                     fs.writeFile('data/'+ csvFileName +'.csv', csv, function(error){
                         if(error) throw error;
