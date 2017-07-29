@@ -4,6 +4,7 @@
   "description": "content scraper for fullstack project 6",
   "main": "app.js",
   "dependencies": {
+    "json2csv": "^3.10.0",
     "scrape-it": "^3.3.2"
   },
   "devDependencies": {},

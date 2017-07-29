@@ -3,6 +3,8 @@
  */
 //const scrapeIt = require("./scrape-it");
 const fs = require('fs');
+const json2csv = require('json2csv');
+const fields = ['Title', 'Price', 'Image Url', 'Url', 'Time'];
 
 //looks to see if there is a specific directoy and if there isnt it makes it
 function isDirSync(aPath){
@@ -51,9 +53,32 @@ let urls = [];
                     attr: "src"
                 }
             }).then(shirtDetails => {
-                console.log(shirtDetails);
+                var tshirts = [
+                    {
+                        "Title": shirtDetails.title,
+                        "Price": shirtDetails.price,
+                        "Image Url": mainURL + shirtDetails.image,
+                        "Url": url,
+                        "Time": 'date here'
+                    }
+                ];
+            
+                console.log(tshirts)
+                var csv = json2csv({data: tshirts, fields:fields});
+                console.log(csv);
+                fs.writeFile('data/file.csv', csv, function(error){
+                    if(error) throw error;
+                    console.log('file saved');
+                })
+
+                //console.log(shirtDetails)
+                //console.log(shirtDetails.title)
+                //console.log(shirtDetails.price)
+                //console.log(mainURL+shirtDetails.image)
+                //console.log(shirtDetails);
             });
         }
+
 
         //urls.push(pageurl); // pushes this to array{ pages: 'shirt.php?id=101' }
         //console.log(urls);
