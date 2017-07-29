@@ -44,7 +44,6 @@ let urls = [];
         });
         for(url in urls){
              url = mainURL + urls[url];
-
             scrapeIt(url, {
                 title: "title",
                 price: ".wrapper .price",
@@ -58,34 +57,32 @@ let urls = [];
                         "Title": shirtDetails.title,
                         "Price": shirtDetails.price,
                         "Image Url": mainURL + shirtDetails.image,
-                        "Url": url,
+                        "Url": 'url',
                         "Time": 'date here'
                     }
                 ];
-            
+
                 console.log(tshirts)
                 var csv = json2csv({data: tshirts, fields:fields});
-                console.log(csv);
+                //console.log(csv);
                 fs.writeFile('data/file.csv', csv, function(error){
                     if(error) throw error;
-                    console.log('file saved');
+                    //console.log('file saved');
                 })
 
-                //console.log(shirtDetails)
-                //console.log(shirtDetails.title)
-                //console.log(shirtDetails.price)
-                //console.log(mainURL+shirtDetails.image)
-                //console.log(shirtDetails);
             });
         }
-
-
-        //urls.push(pageurl); // pushes this to array{ pages: 'shirt.php?id=101' }
-        //console.log(urls);
-        //return urls;
     });
 /*//this should be dynamic
 urls = ["shirt.php?id=101",
     "shirt.php?id=102",
     "shirt.php?id=103"];*/
 
+//console.log(shirtDetails)
+//console.log(shirtDetails.title)
+//console.log(shirtDetails.price)
+//console.log(mainURL+shirtDetails.image)
+//console.log(shirtDetails);
+//urls.push(pageurl); // pushes this to array{ pages: 'shirt.php?id=101' }
+//console.log(urls);
+//return urls;
