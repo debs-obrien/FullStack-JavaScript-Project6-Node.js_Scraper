@@ -26,7 +26,6 @@ const scrapeIt = require("scrape-it");
 const mainURL = "http://www.shirts4mike.com/";
 let url;
 let urls = [];
-//this only gives me one url need to find a way to get all foreach/for in/for ??
     scrapeIt("http://www.shirts4mike.com/shirts.php", {
         tshirtLinks: {
             listItem: ".products li",
@@ -57,14 +56,14 @@ let urls = [];
                         "Title": shirtDetails.title,
                         "Price": shirtDetails.price,
                         "Image Url": mainURL + shirtDetails.image,
-                        "Url": 'url',
-                        "Time": 'date here'
+                        "Url": 'url needs to be fixed',
+                        "Time": new Date()
                     }
                 ];
 
-                console.log(tshirts)
+                //console.log(tshirts)
                 var csv = json2csv({data: tshirts, fields:fields});
-                //console.log(csv);
+                console.log(csv);
                 fs.writeFile('data/file.csv', csv, function(error){
                     if(error) throw error;
                     //console.log('file saved');
@@ -73,16 +72,4 @@ let urls = [];
             });
         }
     });
-/*//this should be dynamic
-urls = ["shirt.php?id=101",
-    "shirt.php?id=102",
-    "shirt.php?id=103"];*/
 
-//console.log(shirtDetails)
-//console.log(shirtDetails.title)
-//console.log(shirtDetails.price)
-//console.log(mainURL+shirtDetails.image)
-//console.log(shirtDetails);
-//urls.push(pageurl); // pushes this to array{ pages: 'shirt.php?id=101' }
-//console.log(urls);
-//return urls;
