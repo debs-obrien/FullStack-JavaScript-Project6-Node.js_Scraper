@@ -1,0 +1,15 @@
+{
+  "name": "content_scraper",
+  "version": "1.0.0",
+  "description": "content scraper for fullstack project 6",
+  "main": "app.js",
+  "dependencies": {
+    "scrape-it": "^3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Debbie",
+  "license": "MIT"
+}
