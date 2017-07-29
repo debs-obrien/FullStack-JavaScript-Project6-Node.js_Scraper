@@ -5,6 +5,9 @@
 const fs = require('fs');
 const json2csv = require('json2csv');
 const fields = ['Title', 'Price', 'Image Url', 'Url', 'Time'];
+let date = new Date();
+
+let csvFileName = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
 
 //looks to see if there is a specific directoy and if there isnt it makes it
 function isDirSync(aPath){
@@ -57,14 +60,14 @@ let urls = [];
                         "Price": shirtDetails.price,
                         "Image Url": mainURL + shirtDetails.image,
                         "Url": 'url needs to be fixed',
-                        "Time": new Date()
+                        "Time": date.getTime()
                     }
                 ];
 
                 //console.log(tshirts)
                 var csv = json2csv({data: tshirts, fields:fields});
                 console.log(csv);
-                fs.writeFile('data/file.csv', csv, function(error){
+                fs.writeFile('data/'+ csvFileName +'.csv', csv, function(error){
                     if(error) throw error;
                     //console.log('file saved');
                 })
