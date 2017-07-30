@@ -10,7 +10,7 @@ const shirtsURL = "http://www.shirts4mike.com/shirts.php";
 const mainURL = "http://www.shirts4mike.com/";
 let url;
 let urls = [];
-const fields = ['Title', 'Price', 'Image Url', 'Url', 'Time'];
+const fields = ['Titled', 'Priced', 'Image Urld', 'Urld', 'Timed'];
 let date = new Date();
 let csvFileName = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
 
@@ -30,6 +30,10 @@ function isDirSync(aPath){
 }
 if(!isDirSync('data')){
     fs.mkdirSync('data');
+}
+
+function error(error){
+    if(error) throw error;
 }
 /*
  This function first scrapes the page with the 8 t-shirts and gets the href of each t-shirt
@@ -55,6 +59,9 @@ function scrapeData(site){
             pageurls.tshirtLinks.forEach(function(element){
                 urls.push(element.links);
             });//end of forEach
+            let csvFields = json2csv({fields:fields});
+
+            fs.writeFile('data/'+ csvFileName +'.csv', csvFields, error());
             for(url in urls){
                 url = mainURL + urls[url];
                 scrapeIt(url, {
@@ -74,11 +81,12 @@ function scrapeData(site){
                             "Time": date.getTime()
                         }
                     ];
-                    let csv = json2csv({data: tshirts, fields:fields});
-                    console.log(csv);
-                        fs.writeFile('data/'+ csvFileName +'.csv', csv, function(error){
-                            if(error) throw error;
-                        });
+                    let csvData = [];
+                    csvData.push(tshirts);
+                    console.log(csvData)
+                    let csv = json2csv({data: tshirts });
+                    fs.appendFile('data/'+ csvFileName +'.csv', csv, error());
+                    console.log('done')
                 });//end of promise shirtDetails
             }//end of for
         }).catch(function(){  //end of promise pageurls then it catches
